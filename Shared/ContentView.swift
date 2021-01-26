@@ -27,12 +27,18 @@ struct Home: View {
                 ForEach(0..<9, id: \.self) {index in
                     
                     Color.blue
+                        .frame(width: getWidth(), height: getWidth())
+                        .cornerRadius(15)
                 }
-                
             }
+            .padding(15)
         }
+    }
+    
+    func getWidth() -> CGFloat {
+        let width = UIScreen.main.bounds.width - (30 + 30)
         
-        .padding(15)
+        return width / 3
     }
 }
 
