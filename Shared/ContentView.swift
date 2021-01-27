@@ -40,11 +40,11 @@ struct Home: View {
         
         return width / 3
     }
-}
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        }
     }
 }
