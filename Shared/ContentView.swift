@@ -19,6 +19,11 @@ struct ContentView: View {
 }
 
 struct Home: View {
+    
+    @State var moves : [String] = Array(repeating: "", count: 9)
+    
+    @State var isPlaying = true
+    
     var body: some View {
         VStack {
             
@@ -26,11 +31,31 @@ struct Home: View {
                 
                 ForEach(0..<9, id: \.self) {index in
                     
-                    Color.blue
-                        .frame(width: getWidth(), height: getWidth())
-                        .cornerRadius(15)
+                    ZStack {
+                        Color.blue
+                        
+                        Text(moves[index])
+                            .font(.system(size: 55))
+                            .fontWeight(.heavy)
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: getWidth(), height: getWidth())
+                    .cornerRadius(15)
                 }
+                
+                .frame(width: getWidth(), height:
+                       getWidth())
+                .cornerRadius(15)
+                .onTapGesture(perform: {
+                    withAnimation(Animation
+                                    .easeIn(duration: 0.5)) {
+                        
+                        moves[index] = isPlaying ? "X" : "O"
+                        isPlaying.toggle()
+                    }
+                })
             }
+        }
             .padding(15)
         }
     }
