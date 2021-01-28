@@ -34,24 +34,34 @@ struct Home: View {
                     ZStack {
                         Color.blue
                         
+                        Color.green
+                            .opacity(moves[index] == "" ? 1 : 0)
+                        
                         Text(moves[index])
                             .font(.system(size: 55))
                             .fontWeight(.heavy)
                             .foregroundColor(.black)
                     }
-                    .frame(width: getWidth(), height: getWidth())
-                    .cornerRadius(15)
-                }
-                
+            
                 .frame(width: getWidth(), height:
                        getWidth())
                 .cornerRadius(15)
+                    .rotation3DEffect(
+                        .init(degrees: moves[index] != "" ? 180 : 0),
+                        axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/,
+                        anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
+                        anchorZ: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/,
+                        perspective: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/
+                    )
+
                 .onTapGesture(perform: {
                     withAnimation(Animation
-                                    .easeIn(duration: 0.5)) {
+                                    .easeIn(duration: 1.0)) {
                         
-                        moves[index] = isPlaying ? "X" : "O"
+                        if moves[index] == "" {
+                            moves[index] = isPlaying ? "X" : "O"
                         isPlaying.toggle()
+                        }
                     }
                 })
             }
